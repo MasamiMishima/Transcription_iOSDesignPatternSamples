@@ -7,14 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70933219FE71F00DEDFBC /* RxBlocking.framework */; };
+		5EF7093A219FE72000DEDFBC /* NoticeObserveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70934219FE71F00DEDFBC /* NoticeObserveKit.framework */; };
+		5EF7093B219FE72000DEDFBC /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70935219FE71F00DEDFBC /* Nuke.framework */; };
+		5EF7093C219FE72000DEDFBC /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70936219FE72000DEDFBC /* RxSwift.framework */; };
+		5EF7093D219FE72000DEDFBC /* SwiftIconFont.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70937219FE72000DEDFBC /* SwiftIconFont.framework */; };
+		5EF7093E219FE72000DEDFBC /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70938219FE72000DEDFBC /* RxCocoa.framework */; };
 		8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */; };
-		8F652B40219E43BC00AEAE67 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B3F219E43BC00AEAE67 /* ViewController.swift */; };
 		8F652B43219E43BC00AEAE67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B41219E43BC00AEAE67 /* Main.storyboard */; };
-		8F652B46219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B44219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodeld */; };
 		8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B47219E43C000AEAE67 /* Assets.xcassets */; };
 		8F652B4B219E43C000AEAE67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B49219E43C000AEAE67 /* LaunchScreen.storyboard */; };
-		8F652B56219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B55219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.swift */; };
-		8F652B61219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B60219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,20 +37,20 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		5EF70933219FE71F00DEDFBC /* RxBlocking.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxBlocking.framework; path = Carthage/Build/iOS/RxBlocking.framework; sourceTree = "<group>"; };
+		5EF70934219FE71F00DEDFBC /* NoticeObserveKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NoticeObserveKit.framework; path = Carthage/Build/iOS/NoticeObserveKit.framework; sourceTree = "<group>"; };
+		5EF70935219FE71F00DEDFBC /* Nuke.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Nuke.framework; path = Carthage/Build/iOS/Nuke.framework; sourceTree = "<group>"; };
+		5EF70936219FE72000DEDFBC /* RxSwift.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxSwift.framework; path = Carthage/Build/iOS/RxSwift.framework; sourceTree = "<group>"; };
+		5EF70937219FE72000DEDFBC /* SwiftIconFont.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftIconFont.framework; path = Carthage/Build/iOS/SwiftIconFont.framework; sourceTree = "<group>"; };
+		5EF70938219FE72000DEDFBC /* RxCocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxCocoa.framework; path = Carthage/Build/iOS/RxCocoa.framework; sourceTree = "<group>"; };
 		8F652B3A219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcription_iOSDesignPatternSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		8F652B3F219E43BC00AEAE67 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		8F652B42219E43BC00AEAE67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		8F652B45219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Transcription_iOSDesignPatternSamples.xcdatamodel; sourceTree = "<group>"; };
 		8F652B47219E43C000AEAE67 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8F652B4A219E43C000AEAE67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8F652B4C219E43C000AEAE67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F652B51219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Transcription_iOSDesignPatternSamplesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F652B55219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcription_iOSDesignPatternSamplesTests.swift; sourceTree = "<group>"; };
-		8F652B57219E43C000AEAE67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8F652B5C219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Transcription_iOSDesignPatternSamplesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8F652B60219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Transcription_iOSDesignPatternSamplesUITests.swift; sourceTree = "<group>"; };
-		8F652B62219E43C000AEAE67 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */,
+				5EF7093A219FE72000DEDFBC /* NoticeObserveKit.framework in Frameworks */,
+				5EF7093B219FE72000DEDFBC /* Nuke.framework in Frameworks */,
+				5EF7093C219FE72000DEDFBC /* RxSwift.framework in Frameworks */,
+				5EF7093D219FE72000DEDFBC /* SwiftIconFont.framework in Frameworks */,
+				5EF7093E219FE72000DEDFBC /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,13 +84,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		5EF70932219FE71E00DEDFBC /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				5EF70934219FE71F00DEDFBC /* NoticeObserveKit.framework */,
+				5EF70935219FE71F00DEDFBC /* Nuke.framework */,
+				5EF70933219FE71F00DEDFBC /* RxBlocking.framework */,
+				5EF70938219FE72000DEDFBC /* RxCocoa.framework */,
+				5EF70936219FE72000DEDFBC /* RxSwift.framework */,
+				5EF70937219FE72000DEDFBC /* SwiftIconFont.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		8F652B31219E43BC00AEAE67 = {
 			isa = PBXGroup;
 			children = (
 				8F652B3C219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples */,
-				8F652B54219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests */,
-				8F652B5F219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests */,
 				8F652B3B219E43BC00AEAE67 /* Products */,
+				5EF70932219FE71E00DEDFBC /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -100,32 +120,12 @@
 			isa = PBXGroup;
 			children = (
 				8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */,
-				8F652B3F219E43BC00AEAE67 /* ViewController.swift */,
 				8F652B41219E43BC00AEAE67 /* Main.storyboard */,
 				8F652B47219E43C000AEAE67 /* Assets.xcassets */,
 				8F652B49219E43C000AEAE67 /* LaunchScreen.storyboard */,
 				8F652B4C219E43C000AEAE67 /* Info.plist */,
-				8F652B44219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodeld */,
 			);
 			path = Transcription_iOSDesignPatternSamples;
-			sourceTree = "<group>";
-		};
-		8F652B54219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests */ = {
-			isa = PBXGroup;
-			children = (
-				8F652B55219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.swift */,
-				8F652B57219E43C000AEAE67 /* Info.plist */,
-			);
-			path = Transcription_iOSDesignPatternSamplesTests;
-			sourceTree = "<group>";
-		};
-		8F652B5F219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests */ = {
-			isa = PBXGroup;
-			children = (
-				8F652B60219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.swift */,
-				8F652B62219E43C000AEAE67 /* Info.plist */,
-			);
-			path = Transcription_iOSDesignPatternSamplesUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -259,8 +259,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F652B46219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodeld in Sources */,
-				8F652B40219E43BC00AEAE67 /* ViewController.swift in Sources */,
 				8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -269,7 +267,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F652B56219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -277,7 +274,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8F652B61219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,6 +433,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Transcription_iOSDesignPatternSamples/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -454,6 +454,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = Transcription_iOSDesignPatternSamples/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -584,19 +588,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		8F652B44219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				8F652B45219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodel */,
-			);
-			currentVersion = 8F652B45219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.xcdatamodel */;
-			path = Transcription_iOSDesignPatternSamples.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 8F652B32219E43BC00AEAE67 /* Project object */;
 }
