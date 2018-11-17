@@ -2,8 +2,8 @@
 //  AppDelegate.swift
 //  Transcription_iOSDesignPatternSamples
 //
-//  Created by 三島 正三 on 2018/11/16.
-//  Copyright © 2018 三島 正三. All rights reserved.
+//  Created by Masami Mishima on 2018/11/16.
+//  Copyright © 2018 Masami Mishima. All rights reserved.
 //
 
 import UIKit
