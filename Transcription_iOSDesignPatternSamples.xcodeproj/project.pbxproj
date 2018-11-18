@@ -18,6 +18,9 @@
 		5EF70948219FEEB200DEDFBC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF70947219FEEB200DEDFBC /* SearchViewController.swift */; };
 		5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7094A219FEEEE00DEDFBC /* UserRepositoryViewController.swift */; };
 		5EF7094D219FEEEE00DEDFBC /* UserRepositoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF7094B219FEEEE00DEDFBC /* UserRepositoryViewController.xib */; };
+		5EF7095021A1AE4600DEDFBC /* UIKeyboardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7094F21A1AE4600DEDFBC /* UIKeyboardInfo.swift */; };
+		5EF7095421A1B08E00DEDFBC /* UIKeyboardWillHide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095321A1B08E00DEDFBC /* UIKeyboardWillHide.swift */; };
+		5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */; };
 		8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */; };
 		8F652B43219E43BC00AEAE67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B41219E43BC00AEAE67 /* Main.storyboard */; };
 		8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B47219E43C000AEAE67 /* Assets.xcassets */; };
@@ -53,6 +56,9 @@
 		5EF70947219FEEB200DEDFBC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5EF7094A219FEEEE00DEDFBC /* UserRepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewController.swift; sourceTree = "<group>"; };
 		5EF7094B219FEEEE00DEDFBC /* UserRepositoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserRepositoryViewController.xib; sourceTree = "<group>"; };
+		5EF7094F21A1AE4600DEDFBC /* UIKeyboardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardInfo.swift; sourceTree = "<group>"; };
+		5EF7095321A1B08E00DEDFBC /* UIKeyboardWillHide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardWillHide.swift; sourceTree = "<group>"; };
+		5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardWillShow.swift; sourceTree = "<group>"; };
 		8F652B3A219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcription_iOSDesignPatternSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F652B42219E43BC00AEAE67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -68,8 +74,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */,
 				5EF7093A219FE72000DEDFBC /* NoticeObserveKit.framework in Frameworks */,
+				5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */,
 				5EF7093B219FE72000DEDFBC /* Nuke.framework in Frameworks */,
 				5EF7093C219FE72000DEDFBC /* RxSwift.framework in Frameworks */,
 				5EF7093D219FE72000DEDFBC /* SwiftIconFont.framework in Frameworks */,
@@ -122,6 +128,7 @@
 		5EF70940219FEBAB00DEDFBC /* Sources */ = {
 			isa = PBXGroup;
 			children = (
+				5EF7095221A1AE6900DEDFBC /* Common */,
 				5EF7093F219FEB6400DEDFBC /* UI */,
 			);
 			path = Sources;
@@ -160,6 +167,25 @@
 			path = UserRepository;
 			sourceTree = "<group>";
 		};
+		5EF7095121A1AE4E00DEDFBC /* NotieObserver */ = {
+			isa = PBXGroup;
+			children = (
+				5EF7094F21A1AE4600DEDFBC /* UIKeyboardInfo.swift */,
+				5EF7095321A1B08E00DEDFBC /* UIKeyboardWillHide.swift */,
+				5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */,
+			);
+			path = NotieObserver;
+			sourceTree = "<group>";
+		};
+		5EF7095221A1AE6900DEDFBC /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */,
+				5EF7095121A1AE4E00DEDFBC /* NotieObserver */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
 		8F652B31219E43BC00AEAE67 = {
 			isa = PBXGroup;
 			children = (
@@ -182,7 +208,6 @@
 		8F652B3C219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples */ = {
 			isa = PBXGroup;
 			children = (
-				8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */,
 				5EF70940219FEBAB00DEDFBC /* Sources */,
 				8F652B47219E43C000AEAE67 /* Assets.xcassets */,
 				8F652B49219E43C000AEAE67 /* LaunchScreen.storyboard */,
@@ -323,9 +348,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EF7095021A1AE4600DEDFBC /* UIKeyboardInfo.swift in Sources */,
 				5EF70942219FEC5200DEDFBC /* FavoriteViewController.swift in Sources */,
 				5EF70945219FED6400DEDFBC /* RepositoryViewController.swift in Sources */,
+				5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */,
 				5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */,
+				5EF7095421A1B08E00DEDFBC /* UIKeyboardWillHide.swift in Sources */,
 				5EF70948219FEEB200DEDFBC /* SearchViewController.swift in Sources */,
 				8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */,
 			);
