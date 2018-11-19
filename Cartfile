@@ -1,2 +1,2 @@
-github "marty-suzuki/GithubKitForSample"
-github "marty-suzuki/NoticeObserveKit"
+github "marty-suzuki/GithubKitForSample" "0.2.3"
+github "marty-suzuki/NoticeObserveKit" "0.4.0"

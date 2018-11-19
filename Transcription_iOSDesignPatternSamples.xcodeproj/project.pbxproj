@@ -23,6 +23,8 @@
 		5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */; };
 		5EF7095921A2F00500DEDFBC /* GithubKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF7095821A2F00500DEDFBC /* GithubKit.framework */; };
 		5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */; };
+		5EF7095E21A2F6C100DEDFBC /* ApiSession.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */; };
+		5EF7096121A2FB9F00DEDFBC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */; };
 		8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */; };
 		8F652B43219E43BC00AEAE67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B41219E43BC00AEAE67 /* Main.storyboard */; };
 		8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B47219E43C000AEAE67 /* Assets.xcassets */; };
@@ -63,6 +65,8 @@
 		5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardWillShow.swift; sourceTree = "<group>"; };
 		5EF7095821A2F00500DEDFBC /* GithubKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GithubKit.framework; path = Carthage/Build/iOS/GithubKit.framework; sourceTree = "<group>"; };
 		5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.extension.swift; sourceTree = "<group>"; };
+		5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
 		8F652B3A219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcription_iOSDesignPatternSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F652B42219E43BC00AEAE67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -78,6 +82,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5EF7096121A2FB9F00DEDFBC /* SafariServices.framework in Frameworks */,
 				5EF7095921A2F00500DEDFBC /* GithubKit.framework in Frameworks */,
 				5EF7093A219FE72000DEDFBC /* NoticeObserveKit.framework in Frameworks */,
 				5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */,
@@ -108,6 +113,7 @@
 		5EF70932219FE71E00DEDFBC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */,
 				5EF7095821A2F00500DEDFBC /* GithubKit.framework */,
 				5EF70934219FE71F00DEDFBC /* NoticeObserveKit.framework */,
 				5EF70935219FE71F00DEDFBC /* Nuke.framework */,
@@ -123,6 +129,7 @@
 			isa = PBXGroup;
 			children = (
 				8F652B41219E43BC00AEAE67 /* Main.storyboard */,
+				5EF7095C21A2F69E00DEDFBC /* Common */,
 				5EF70943219FEC6A00DEDFBC /* Favorite */,
 				5EF70946219FEE0E00DEDFBC /* Repository */,
 				5EF70949219FEED500DEDFBC /* Search */,
@@ -188,9 +195,25 @@
 			children = (
 				8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */,
 				5EF7095121A1AE4E00DEDFBC /* NotieObserver */,
+				5EF7095F21A2F8F300DEDFBC /* Extension */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		5EF7095C21A2F69E00DEDFBC /* Common */ = {
+			isa = PBXGroup;
+			children = (
 				5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		5EF7095F21A2F8F300DEDFBC /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		8F652B31219E43BC00AEAE67 = {
@@ -388,6 +411,7 @@
 				5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */,
 				5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */,
 				5EF7095421A1B08E00DEDFBC /* UIKeyboardWillHide.swift in Sources */,
+				5EF7095E21A2F6C100DEDFBC /* ApiSession.extension.swift in Sources */,
 				5EF70948219FEEB200DEDFBC /* SearchViewController.swift in Sources */,
 				8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */,
 				5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */,
