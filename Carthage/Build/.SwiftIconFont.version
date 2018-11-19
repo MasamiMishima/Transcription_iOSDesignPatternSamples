@@ -2,8 +2,8 @@
   "commitish" : "2.7.2",
   "iOS" : [
     {
-      "hash" : "6e46c6f54a18494fb79ac1108ca3e66c68a15a0258b0d0df54eb842cdedb231b",
-      "name" : "SwiftIconFont"
+      "name" : "SwiftIconFont",
+      "hash" : "79e0543b6c04a7290d9c48191b3fef84a729d90852ec4dd24d76d91595fcdd29"
     }
   ]
 }
