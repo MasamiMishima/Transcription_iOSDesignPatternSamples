@@ -49,19 +49,79 @@ class SearchViewController: UIViewController {
     private(set) lazy var dataSource: SearchViewDataSource = {
         return .init(fetchUsers: { [weak self] in
             self?.fetchUsers()
-        }, isFechingUsers: { [weak self] in
-            return self?.isFetchingUsers ?? false
-        }, users: { [weak self] in
-            self?.users ?? []
-        }, selectedUser: { [weak self] user in
-        
+            }, isFetchingUsers: { [weak self] in
+                return self?.isFetchingUsers ?? false
+            }, users: { [weak self] in
+                self?.users ?? []
+            }, selectedUser: { [weak self] user in
         })
     }()
-    
+    fileprivate let debounce: (_ action: @escaping () -> ()) -> () = {
+        var lastFireTime: DispatchTime = .now()
+        var delay: DispatchTimeInterval = .milliseconds(500)
+        return { [delay] action in
+            let deadline: DispatchTime = .now() + delay
+            lastFireTime = .now()
+            DispatchQueue.global().asyncAfter(deadline: deadline) { [delay] in
+                let now: DispatchTime = .now()
+                let when: DispatchTime = lastFireTime + delay
+                if now < when { return }
+                lastFireTime = .now()
+                DispatchQueue.main.async {
+                    action()
+                }
+            }
+        }
+    }()
     private var isFetchingUsers = false {
         didSet {
             tableView.reloadData()
         }
+    }
+    private var pool = NoticeObserverPool()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationItem.titleView = searchBar
+        searchBar.placeholder = "Input user name"
+        
+        // ここの作り方真似したい
+        dataSource.configure(with: tableView)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        observeKeyboard()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if searchBar.isFirstResponder {
+            searchBar.resignFirstResponder()
+        }
+        pool = NoticeObserverPool()
+    }
+    
+    private func observeKeyboard() {
+        UIKeyboardWillShow.observe { [weak self] in
+            self?.view.layoutIfNeeded()
+            let extra = self?.tabBarController?.tabBar.bounds.height ?? 0
+            self?.tableViewBottomConstraint.constant = $0.frame.size.height - extra
+            UIView.animate(withDuration: $0.animationDuration, delay: 0, options: $0.animationCurve, animations: {
+                self?.view.layoutIfNeeded()
+            }, completion: nil)
+        }
+        .addObserverTo(pool)
+        
+        UIKeyboardWillHide.observe { [weak self] in
+            self?.view.layoutIfNeeded()
+           
+            self?.tableViewBottomConstraint.constant = 0
+            UIView.animate(withDuration: $0.animationDuration, delay: 0, options: $0.animationCurve, animations: {
+                    self?.view.layoutIfNeeded()
+                }, completion: nil)
+            }
+            .addObserverTo(pool)
     }
     
     private func fetchUsers() {
@@ -85,10 +145,6 @@ class SearchViewController: UIViewController {
             }
             self?.task = nil
         }
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
     }
 }
 
