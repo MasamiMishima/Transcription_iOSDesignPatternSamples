@@ -9,7 +9,6 @@
 import UIKit
 import GithubKit
 
-// TODO: ここ何故か動かないから調べる
 final class LoadingView: UIView, Nibable {
     typealias RegisterType = RegisterNib
     
