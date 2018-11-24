@@ -17,7 +17,6 @@
 		5EF70945219FED6400DEDFBC /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF70944219FED6400DEDFBC /* RepositoryViewController.swift */; };
 		5EF70948219FEEB200DEDFBC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF70947219FEEB200DEDFBC /* SearchViewController.swift */; };
 		5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7094A219FEEEE00DEDFBC /* UserRepositoryViewController.swift */; };
-		5EF7094D219FEEEE00DEDFBC /* UserRepositoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF7094B219FEEEE00DEDFBC /* UserRepositoryViewController.xib */; };
 		5EF7095021A1AE4600DEDFBC /* UIKeyboardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7094F21A1AE4600DEDFBC /* UIKeyboardInfo.swift */; };
 		5EF7095421A1B08E00DEDFBC /* UIKeyboardWillHide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095321A1B08E00DEDFBC /* UIKeyboardWillHide.swift */; };
 		5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */; };
@@ -29,6 +28,8 @@
 		5EF7096521A4543D00DEDFBC /* NSObjectProtocol.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */; };
 		5EF7096721A4568600DEDFBC /* SearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */; };
 		5EF7096921A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */; };
+		5EF7096B21A99D0800DEDFBC /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF7096A21A99D0800DEDFBC /* LoadingView.xib */; };
+		5EF7096F21A99D4D00DEDFBC /* UserRepositoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF7096E21A99D4D00DEDFBC /* UserRepositoryViewController.xib */; };
 		8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */; };
 		8F652B43219E43BC00AEAE67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B41219E43BC00AEAE67 /* Main.storyboard */; };
 		8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B47219E43C000AEAE67 /* Assets.xcassets */; };
@@ -63,7 +64,6 @@
 		5EF70944219FED6400DEDFBC /* RepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewController.swift; sourceTree = "<group>"; };
 		5EF70947219FEEB200DEDFBC /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		5EF7094A219FEEEE00DEDFBC /* UserRepositoryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewController.swift; sourceTree = "<group>"; };
-		5EF7094B219FEEEE00DEDFBC /* UserRepositoryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserRepositoryViewController.xib; sourceTree = "<group>"; };
 		5EF7094F21A1AE4600DEDFBC /* UIKeyboardInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardInfo.swift; sourceTree = "<group>"; };
 		5EF7095321A1B08E00DEDFBC /* UIKeyboardWillHide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardWillHide.swift; sourceTree = "<group>"; };
 		5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIKeyboardWillShow.swift; sourceTree = "<group>"; };
@@ -75,6 +75,8 @@
 		5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectProtocol.extension.swift; sourceTree = "<group>"; };
 		5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDataSource.swift; sourceTree = "<group>"; };
 		5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewDataSource.swift; sourceTree = "<group>"; };
+		5EF7096A21A99D0800DEDFBC /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
+		5EF7096E21A99D4D00DEDFBC /* UserRepositoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRepositoryViewController.xib; sourceTree = "<group>"; };
 		8F652B3A219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcription_iOSDesignPatternSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F652B42219E43BC00AEAE67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -185,7 +187,7 @@
 			children = (
 				5EF7094A219FEEEE00DEDFBC /* UserRepositoryViewController.swift */,
 				5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */,
-				5EF7094B219FEEEE00DEDFBC /* UserRepositoryViewController.xib */,
+				5EF7096E21A99D4D00DEDFBC /* UserRepositoryViewController.xib */,
 			);
 			path = UserRepository;
 			sourceTree = "<group>";
@@ -214,6 +216,7 @@
 			isa = PBXGroup;
 			children = (
 				5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */,
+				5EF7096A21A99D0800DEDFBC /* LoadingView.xib */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -365,8 +368,9 @@
 			files = (
 				8F652B4B219E43C000AEAE67 /* LaunchScreen.storyboard in Resources */,
 				8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */,
-				5EF7094D219FEEEE00DEDFBC /* UserRepositoryViewController.xib in Resources */,
+				5EF7096F21A99D4D00DEDFBC /* UserRepositoryViewController.xib in Resources */,
 				8F652B43219E43BC00AEAE67 /* Main.storyboard in Resources */,
+				5EF7096B21A99D0800DEDFBC /* LoadingView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
