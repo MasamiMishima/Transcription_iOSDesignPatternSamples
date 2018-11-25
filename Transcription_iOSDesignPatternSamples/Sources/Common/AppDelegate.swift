@@ -14,7 +14,7 @@ import GithubKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    private(set) var bookmarks: [Repository] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -44,7 +44,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Saves changes in the application's managed object context before the application terminates.
         self.saveContext()
     }
-
+    
+    func addBookmark(_ bookmark: Repository) {
+        bookmarks.append(bookmark)
+    }
+    
+    func removeBookMark(_ bookmark: Repository) {
+        guard let index = bookmarks.index(where: {
+            $0.url == bookmark.url
+        }) else {
+            return
+        }
+        
+        bookmarks.remove(at: index)
+    }
+    
     // MARK: - Core Data stack
 
     lazy var persistentContainer: NSPersistentContainer = {
