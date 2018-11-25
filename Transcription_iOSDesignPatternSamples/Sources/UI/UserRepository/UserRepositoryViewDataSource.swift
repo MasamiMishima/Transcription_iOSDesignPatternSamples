@@ -52,8 +52,8 @@ extension UserRepositoryViewDataSource: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RepositoryViewCell.self, for: indexPath)
-    
+        
+        let cell = tableView.dequeue(RepositoryViewCell.self, for: indexPath)
         cell.configure(with: repositories()[indexPath.row])
         return cell
     }

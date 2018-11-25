@@ -15,7 +15,7 @@ class SearchViewController: UIViewController {
     @IBOutlet weak var totalCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
-    private(self) lazy var searchBar: UISearchBar = {
+    private(set) lazy var searchBar: UISearchBar = {
         let searchBar = UISearchBar(frame: .zero)
         searchBar.delegate = self
         return searchBar
@@ -54,6 +54,7 @@ class SearchViewController: UIViewController {
             }, users: { [weak self] in
                 self?.users ?? []
             }, selectedUser: { [weak self] user in
+                self?.showUserRepository(with: user)
         })
     }()
     fileprivate let debounce: (_ action: @escaping () -> ()) -> () = {
@@ -145,6 +146,11 @@ class SearchViewController: UIViewController {
             }
             self?.task = nil
         }
+    }
+    
+    private func showUserRepository(with user: User) {
+        let vc = UserRepositoryViewController(user: user)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 
