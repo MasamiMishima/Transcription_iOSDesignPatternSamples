@@ -14,7 +14,7 @@ import GithubKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    private(set) var bookmarks: [Repository] = []
+    private(set) var favorites: [Repository] = []
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -45,18 +45,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.saveContext()
     }
     
-    func addBookmark(_ bookmark: Repository) {
-        bookmarks.append(bookmark)
+    func addFavorite(_ bookmark: Repository) {
+        favorites.append(bookmark)
     }
     
-    func removeBookMark(_ bookmark: Repository) {
-        guard let index = bookmarks.index(where: {
+    func removeFavorite(_ bookmark: Repository) {
+        guard let index = favorites.index(where: {
             $0.url == bookmark.url
         }) else {
             return
         }
         
-        bookmarks.remove(at: index)
+        favorites.remove(at: index)
     }
     
     // MARK: - Core Data stack

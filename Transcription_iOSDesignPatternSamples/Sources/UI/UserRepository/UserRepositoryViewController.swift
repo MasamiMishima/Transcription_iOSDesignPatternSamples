@@ -91,6 +91,6 @@ class UserRepositoryViewController: UIViewController {
     
     private func showRepository(with repository: Repository) {
         let vc = RepositoryViewController(repository: repository)
-        navigationController?.pushViewController(Vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
