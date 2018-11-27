@@ -9,21 +9,16 @@
 import UIKit
 import GithubKit
 
+protocol FavoriteHandlable: class {
+    func getFavorites() -> [Repository]
+    func setFavorites(_ repositories: [Repository])
+}
+
 final class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    private var favorites: [Repository] {
-        return (UIApplication.shared.delegate as? AppDelegate)?.favorites ?? []
-    }
-    
-    private(set) lazy var detasource: FavoriteVireDataSource = {
-        return .init(favorites: { [weak self] in
-            return self?.favorites ?? []
-            }, selectedFavorite: { [weak self] repository in
-                self?.showRepository(with: repository)
-        })
-    }()
+    fileprivate var favorites: [Repository] = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +26,7 @@ final class FavoriteViewController: UIViewController {
         title = "On Memory Favorite"
         automaticallyAdjustsScrollViewInsets = false
         
-        detasource.configure(with: tableView)
+        configure(with: tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -40,8 +35,16 @@ final class FavoriteViewController: UIViewController {
         tableView.reloadData()
     }
     
+    private func configure(with tableView: UITableView) {
+         let vc = RepositoryViewController(repository: repository, favoriteHandlable: self)
+        tableView.delegate = self
+        
+        tableView.register(RepositoryViewCell.self)
+    }
+    
     private func showRepository(with repository: Repository) {
-        let vc = RepositoryViewController(repository: repository)
+        let vc = RepositoryViewController(repository: repository,
+                                          entersReaderIfAvailable: self)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

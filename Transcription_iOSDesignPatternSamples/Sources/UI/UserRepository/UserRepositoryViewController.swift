@@ -14,17 +14,15 @@ class UserRepositoryViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var totalCountLabel: UILabel!
     
-    private lazy var dataSource: UserRepositoryViewDataSource = {
-        return .init(fetchRepositories: { [weak self] in
-            self?.fetchRepositories()
-            }, repositories: { [weak self] in
-                return self?.repositories ?? []
-            }, isFetchingRepositories: { [weak self] in
-                return self?.isFetchingRepositories ?? false
-            }, selectedRepository: { [weak self] repository in
-                self?.showRepository(with: repository)
-        })
-    }()
+    fileprivate let loadingView = LoadingView.makeFromNib()
+    
+    fileprivate var isReachdBottom: Bool = false {
+        didSet {
+            if isReachdBottom && isReachdBottom != oldValue {
+                fetchRepositories()
+            }
+        }
+    }
     private var isFetchingRepositories = false {
         didSet {
             tableView.reloadData()
@@ -36,7 +34,7 @@ class UserRepositoryViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    private var repositories: [Repository] = []  {
+    fileprivate var repositories: [Repository] = []  {
         didSet {
             totalCountLabel.text = "\(repositories.count) / \(totalCount)"
             tableView.reloadData()
@@ -46,6 +44,7 @@ class UserRepositoryViewController: UIViewController {
     private var task: URLSessionTask? = nil
     
     private let user: User
+//    private weak var favoriteHanflable: FavoriteHa
     
     init(user: User) {
         self.user = user
