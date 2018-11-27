@@ -40,7 +40,7 @@ class SearchViewController: UIViewController {
             totalCountLabel.text = "\(users.count) / \(totalCount)"
         }
     }
-    private var users: [User] = [] {
+    fileprivate var users: [User] = [] {
         didSet {
             totalCountLabel.text = "\(users.count) / \(totalCount)"
             tableView.reloadData()
@@ -74,12 +74,24 @@ class SearchViewController: UIViewController {
             }
         }
     }()
-    private var isFetchingUsers = false {
+    fileprivate var isFetchingUsers = false {
         didSet {
             tableView.reloadData()
         }
     }
     private var pool = NoticeObserverPool()
+    
+    fileprivate let loadingView = LoadingView.makeFromNib()
+    
+    fileprivate var isReachedBottom: Bool = false {
+        didSet {
+            if isReachedBottom && isReachedBottom != oldValue {
+                fetchUsers()
+            }
+        }
+    }
+    
+    weak var favoriteHandlable: FavoriteHandlable?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -87,7 +99,7 @@ class SearchViewController: UIViewController {
         searchBar.placeholder = "Input user name"
         
         // ここの作り方真似したい
-        dataSource.configure(with: tableView)
+        configure(with: tableView)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -101,6 +113,14 @@ class SearchViewController: UIViewController {
             searchBar.resignFirstResponder()
         }
         pool = NoticeObserverPool()
+    }
+    
+    private func configure(with tableView: UITableView) {
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.register(UserViewCell.self)
+        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: UITableViewHeaderFooterView.className)
     }
     
     private func observeKeyboard() {
@@ -148,8 +168,8 @@ class SearchViewController: UIViewController {
         }
     }
     
-    private func showUserRepository(with user: User) {
-        let vc = UserRepositoryViewController(user: user)
+    fileprivate func showUserRepository(with user: User) {
+        let vc = UserRepositoryViewController(user: user, favoriteHandlable: favoriteHandlable)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -173,5 +193,56 @@ extension SearchViewController: UISearchBarDelegate {
         debounce { [weak self] in
             self?.query = searchText
         }
+    }
+}
+
+extension SearchViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return users.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(UserViewCell.self, for: indexPath)
+        cell.configure(with: users[indexPath.row])
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: UITableViewHeaderFooterView.className) else {
+            return nil
+        }
+        loadingView.removeFromSuperview()
+        loadingView.isLoading = isFetchingUsers
+        loadingView.add(to: view)
+        return view
+    }
+}
+extension SearchViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let user = users[indexPath.row]
+        showUserRepository(with: user)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UserViewCell.calculateHeight(with: users[indexPath.row], and: tableView)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return .leastNormalMagnitude
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return isFetchingUsers ? LoadingView.defaultHeight : .leastNormalMagnitude
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let maxScrollDistance = max(0, scrollView.contentSize.height - scrollView.bounds.size.height)
+        isReachedBottom = maxScrollDistance <= scrollView.contentOffset.y
     }
 }

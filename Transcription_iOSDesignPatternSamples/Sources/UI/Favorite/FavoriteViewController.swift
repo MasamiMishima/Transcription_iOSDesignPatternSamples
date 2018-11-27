@@ -36,7 +36,7 @@ final class FavoriteViewController: UIViewController {
     }
     
     private func configure(with tableView: UITableView) {
-         let vc = RepositoryViewController(repository: repository, favoriteHandlable: self)
+        tableView.dataSource = self
         tableView.delegate = self
         
         tableView.register(RepositoryViewCell.self)
@@ -44,7 +44,42 @@ final class FavoriteViewController: UIViewController {
     
     private func showRepository(with repository: Repository) {
         let vc = RepositoryViewController(repository: repository,
-                                          entersReaderIfAvailable: self)
+                                          favoriteHandlable: self)
         navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+extension FavoriteViewController: FavoriteHandlable {
+    func getFavorites() -> [Repository] {
+        return favorites
+    }
+    
+    func setFavorites(_ repositories: [Repository]) {
+        favorites = repositories
+    }
+}
+
+extension FavoriteViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return favorites.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeue(RepositoryViewCell.self, for: indexPath)
+        cell.configure(with: favorites[indexPath.row])
+        return cell
+    }
+}
+
+extension FavoriteViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
+        
+        let repository = favorites[indexPath.row]
+        showRepository(with: repository)
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return RepositoryViewCell.calculateHeight(with: favorites[indexPath.row], and: tableView)
     }
 }
