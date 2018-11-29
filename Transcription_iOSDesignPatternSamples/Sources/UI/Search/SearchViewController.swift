@@ -102,6 +102,12 @@ class SearchViewController: UIViewController {
         configure(with: tableView)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         observeKeyboard()
@@ -132,7 +138,7 @@ class SearchViewController: UIViewController {
                 self?.view.layoutIfNeeded()
             }, completion: nil)
         }
-        .addObserverTo(pool)
+        .disposed(by: pool)
         
         UIKeyboardWillHide.observe { [weak self] in
             self?.view.layoutIfNeeded()
@@ -142,7 +148,7 @@ class SearchViewController: UIViewController {
                     self?.view.layoutIfNeeded()
                 }, completion: nil)
             }
-            .addObserverTo(pool)
+            .disposed(by: pool)
     }
     
     private func fetchUsers() {
@@ -159,7 +165,16 @@ class SearchViewController: UIViewController {
                     self?.totalCount = value.totalCount
                 }
             case .failure(let error):
-                print(error)
+                if case .emptyToken? = (error as? ApiSession.Error) {
+                    DispatchQueue.main.async {
+                        guard let me = self else { return }
+                        let message = "\"Github Personal Access Token\" is Required.\n Please set it in ApiSession.extension.swift!"
+                        let alert = UIAlertController(title: "Access Token Error",
+                                                      message: message,
+                                                      preferredStyle: .alert)
+                        me.present(alert, animated: false, completion: nil)
+                    }
+                }
             }
             DispatchQueue.main.async {
                 self?.isFetchingUsers = false
