@@ -20,9 +20,6 @@ final class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var favoritesInput: AnyObserver<[Repository]> { return favorites.asObserver() }
-    var favoritesOutput: Observable<[Repository]> { return viewModel.favorites }
-    
     fileprivate var favorites: [Repository] = []
     
     override func viewDidLoad() {
