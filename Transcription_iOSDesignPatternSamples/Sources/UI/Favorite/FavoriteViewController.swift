@@ -8,6 +8,8 @@
 
 import UIKit
 import GithubKit
+import RxSwift
+import RxCocoa
 
 protocol FavoriteHandlable: class {
     func getFavorites() -> [Repository]
@@ -17,6 +19,9 @@ protocol FavoriteHandlable: class {
 final class FavoriteViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var favoritesInput: AnyObserver<[Repository]> { return favorites.asObserver() }
+    var favoritesOutput: Observable<[Repository]> { return viewModel.favorites }
     
     fileprivate var favorites: [Repository] = []
     
