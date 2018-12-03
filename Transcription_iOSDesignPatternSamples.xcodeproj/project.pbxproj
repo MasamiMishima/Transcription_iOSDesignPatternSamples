@@ -24,14 +24,12 @@
 		5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */; };
 		5EF7095E21A2F6C100DEDFBC /* ApiSession.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */; };
 		5EF7096121A2FB9F00DEDFBC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */; };
-		5EF7096321A4541D00DEDFBC /* ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096221A4541D00DEDFBC /* ClassName.swift */; };
 		5EF7096521A4543D00DEDFBC /* NSObjectProtocol.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */; };
 		5EF7096721A4568600DEDFBC /* SearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */; };
 		5EF7096921A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */; };
 		5EF7096B21A99D0800DEDFBC /* LoadingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF7096A21A99D0800DEDFBC /* LoadingView.xib */; };
 		5EF7096F21A99D4D00DEDFBC /* UserRepositoryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5EF7096E21A99D4D00DEDFBC /* UserRepositoryViewController.xib */; };
 		5EF7097121AAEEED00DEDFBC /* FavoriteViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7097021AAEEED00DEDFBC /* FavoriteViewDataSource.swift */; };
-		5EF7097321B2D7D000DEDFBC /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7097221B2D7D000DEDFBC /* Value.swift */; };
 		5EF7097521B2D8F600DEDFBC /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7097421B2D8F600DEDFBC /* FavoriteViewModel.swift */; };
 		8F3B893521B57AAF00811BB0 /* UserRepositoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3B893421B57AAF00811BB0 /* UserRepositoryViewPresenter.swift */; };
 		8F3B893821B581C800811BB0 /* FavoriteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3B893721B581C800811BB0 /* FavoriteModel.swift */; };
@@ -76,14 +74,12 @@
 		5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.extension.swift; sourceTree = "<group>"; };
 		5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		5EF7096221A4541D00DEDFBC /* ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassName.swift; sourceTree = "<group>"; };
 		5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectProtocol.extension.swift; sourceTree = "<group>"; };
 		5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDataSource.swift; sourceTree = "<group>"; };
 		5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewDataSource.swift; sourceTree = "<group>"; };
 		5EF7096A21A99D0800DEDFBC /* LoadingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoadingView.xib; sourceTree = "<group>"; };
 		5EF7096E21A99D4D00DEDFBC /* UserRepositoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = UserRepositoryViewController.xib; sourceTree = "<group>"; };
 		5EF7097021AAEEED00DEDFBC /* FavoriteViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewDataSource.swift; sourceTree = "<group>"; };
-		5EF7097221B2D7D000DEDFBC /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		5EF7097421B2D8F600DEDFBC /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
 		8F3B893421B57AAF00811BB0 /* UserRepositoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewPresenter.swift; sourceTree = "<group>"; };
 		8F3B893721B581C800811BB0 /* FavoriteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteModel.swift; sourceTree = "<group>"; };
@@ -220,8 +216,8 @@
 			children = (
 				8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */,
 				8F3B893721B581C800811BB0 /* FavoriteModel.swift */,
-				5EF7095121A1AE4E00DEDFBC /* NotieObserver */,
 				5EF7095F21A2F8F300DEDFBC /* Extension */,
+				5EF7095121A1AE4E00DEDFBC /* NotieObserver */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -239,9 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */,
-				5EF7096221A4541D00DEDFBC /* ClassName.swift */,
 				5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */,
-				5EF7097221B2D7D000DEDFBC /* Value.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -447,7 +441,6 @@
 				5EF7095021A1AE4600DEDFBC /* UIKeyboardInfo.swift in Sources */,
 				5EF70942219FEC5200DEDFBC /* FavoriteViewController.swift in Sources */,
 				5EF7097121AAEEED00DEDFBC /* FavoriteViewDataSource.swift in Sources */,
-				5EF7097321B2D7D000DEDFBC /* Value.swift in Sources */,
 				5EF70945219FED6400DEDFBC /* RepositoryViewController.swift in Sources */,
 				5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */,
 				5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */,
@@ -459,7 +452,6 @@
 				5EF7096521A4543D00DEDFBC /* NSObjectProtocol.extension.swift in Sources */,
 				5EF7096721A4568600DEDFBC /* SearchViewDataSource.swift in Sources */,
 				5EF7097521B2D8F600DEDFBC /* FavoriteViewModel.swift in Sources */,
-				5EF7096321A4541D00DEDFBC /* ClassName.swift in Sources */,
 				8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */,
 				8F3B893821B581C800811BB0 /* FavoriteModel.swift in Sources */,
 				5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */,
