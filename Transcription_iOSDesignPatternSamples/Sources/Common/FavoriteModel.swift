@@ -6,9 +6,9 @@
 //  Copyright © 2018 Masami Mishima. All rights reserved.
 //
 
-import Foundation
+import GithubKit
 
-@objc protocol FavoriteModelDeletgate: class {
+@objc protocol FavoriteModelDelegate: class {
     @objc optional func favoriteDidChange()
 }
 

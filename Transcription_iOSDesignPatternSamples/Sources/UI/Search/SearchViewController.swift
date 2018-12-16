@@ -10,8 +10,8 @@ import UIKit
 import GithubKit
 import NoticeObserveKit
 
-class SearchViewController: UIViewController {
-
+final class SearchViewController: UIViewController {
+    
     @IBOutlet weak var totalCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
@@ -46,20 +46,9 @@ class SearchViewController: UIViewController {
             tableView.reloadData()
         }
     }
-    private(set) lazy var dataSource: SearchViewDataSource = {
-        return .init(fetchUsers: { [weak self] in
-            self?.fetchUsers()
-            }, isFetchingUsers: { [weak self] in
-                return self?.isFetchingUsers ?? false
-            }, users: { [weak self] in
-                self?.users ?? []
-            }, selectedUser: { [weak self] user in
-                self?.showUserRepository(with: user)
-        })
-    }()
     fileprivate let debounce: (_ action: @escaping () -> ()) -> () = {
         var lastFireTime: DispatchTime = .now()
-        var delay: DispatchTimeInterval = .milliseconds(500)
+        let delay: DispatchTimeInterval = .milliseconds(500)
         return { [delay] action in
             let deadline: DispatchTime = .now() + delay
             lastFireTime = .now()
@@ -91,19 +80,15 @@ class SearchViewController: UIViewController {
         }
     }
     
-    weak var favoriteHandlable: FavoriteHandlable?
+    var favoriteModel: FavoriteModel?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.titleView = searchBar
         searchBar.placeholder = "Input user name"
         
-        // ここの作り方真似したい
         configure(with: tableView)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -135,16 +120,15 @@ class SearchViewController: UIViewController {
             UIView.animate(withDuration: $0.animationDuration, delay: 0, options: $0.animationCurve, animations: {
                 self?.view.layoutIfNeeded()
             }, completion: nil)
-        }
-        .disposed(by: pool)
+            }
+            .disposed(by: pool)
         
         UIKeyboardWillHide.observe { [weak self] in
             self?.view.layoutIfNeeded()
-           
             self?.tableViewBottomConstraint.constant = 0
             UIView.animate(withDuration: $0.animationDuration, delay: 0, options: $0.animationCurve, animations: {
-                    self?.view.layoutIfNeeded()
-                }, completion: nil)
+                self?.view.layoutIfNeeded()
+            }, completion: nil)
             }
             .disposed(by: pool)
     }
@@ -182,7 +166,8 @@ class SearchViewController: UIViewController {
     }
     
     fileprivate func showUserRepository(with user: User) {
-        let vc = UserRepositoryViewController(user: user, favoriteHandlable: favoriteHandlable)
+        guard let favoriteModel = favoriteModel else { return }
+        let vc = UserRepositoryViewController(user: user, favoriteModel: favoriteModel)
         navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -234,6 +219,7 @@ extension SearchViewController: UITableViewDataSource {
         return view
     }
 }
+
 extension SearchViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
