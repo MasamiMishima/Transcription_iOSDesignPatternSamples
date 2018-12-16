@@ -33,6 +33,7 @@
 		5EF7097121AAEEED00DEDFBC /* FavoriteViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7097021AAEEED00DEDFBC /* FavoriteViewDataSource.swift */; };
 		5EF7097321B2D7D000DEDFBC /* Value.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7097221B2D7D000DEDFBC /* Value.swift */; };
 		5EF7097521B2D8F600DEDFBC /* FavoriteViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7097421B2D8F600DEDFBC /* FavoriteViewModel.swift */; };
+		8F3B893521B57AAF00811BB0 /* UserRepositoryViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F3B893421B57AAF00811BB0 /* UserRepositoryViewPresenter.swift */; };
 		8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */; };
 		8F652B43219E43BC00AEAE67 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B41219E43BC00AEAE67 /* Main.storyboard */; };
 		8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B47219E43C000AEAE67 /* Assets.xcassets */; };
@@ -83,6 +84,7 @@
 		5EF7097021AAEEED00DEDFBC /* FavoriteViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewDataSource.swift; sourceTree = "<group>"; };
 		5EF7097221B2D7D000DEDFBC /* Value.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Value.swift; sourceTree = "<group>"; };
 		5EF7097421B2D8F600DEDFBC /* FavoriteViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteViewModel.swift; sourceTree = "<group>"; };
+		8F3B893421B57AAF00811BB0 /* UserRepositoryViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewPresenter.swift; sourceTree = "<group>"; };
 		8F652B3A219E43BC00AEAE67 /* Transcription_iOSDesignPatternSamples.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Transcription_iOSDesignPatternSamples.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F652B3D219E43BC00AEAE67 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8F652B42219E43BC00AEAE67 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -196,6 +198,7 @@
 				5EF7094A219FEEEE00DEDFBC /* UserRepositoryViewController.swift */,
 				5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */,
 				5EF7096E21A99D4D00DEDFBC /* UserRepositoryViewController.xib */,
+				8F3B893421B57AAF00811BB0 /* UserRepositoryViewPresenter.swift */,
 			);
 			path = UserRepository;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				5EF70945219FED6400DEDFBC /* RepositoryViewController.swift in Sources */,
 				5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */,
 				5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */,
+				8F3B893521B57AAF00811BB0 /* UserRepositoryViewPresenter.swift in Sources */,
 				5EF7095421A1B08E00DEDFBC /* UIKeyboardWillHide.swift in Sources */,
 				5EF7095E21A2F6C100DEDFBC /* ApiSession.extension.swift in Sources */,
 				5EF70948219FEEB200DEDFBC /* SearchViewController.swift in Sources */,
