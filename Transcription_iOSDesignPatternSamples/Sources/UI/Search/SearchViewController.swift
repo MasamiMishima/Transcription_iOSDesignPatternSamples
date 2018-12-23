@@ -10,6 +10,10 @@ import UIKit
 import GithubKit
 import NoticeObserveKit
 
+import UIKit
+import GithubKit
+import NoticeObserveKit
+
 final class SearchViewController: UIViewController {
     
     @IBOutlet weak var totalCountLabel: UILabel!
