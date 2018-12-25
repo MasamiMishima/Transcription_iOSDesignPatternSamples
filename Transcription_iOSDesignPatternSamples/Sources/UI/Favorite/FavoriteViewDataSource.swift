@@ -9,14 +9,11 @@
 import Foundation
 import GithubKit
 
-final class FavoriteVireDataSource: NSObject {
-    var favorites: () -> [Repository]
-    let selectedFavorite: (Repository) -> ()
+final class FavoriteViewDataSource: NSObject {
+    fileprivate let presenter: FavoritePresenter
     
-    init(favorites: @escaping () -> [Repository], selectedFavorite: @escaping (Repository) -> ()) {
-        self.favorites = favorites
-        self.selectedFavorite = selectedFavorite
-        super.init()
+    init(presenter: FavoritePresenter) {
+        self.presenter = presenter
     }
     
     func configure(with tableView: UITableView) {
@@ -27,27 +24,27 @@ final class FavoriteVireDataSource: NSObject {
     }
 }
 
-extension FavoriteVireDataSource: UITableViewDataSource {
+extension FavoriteViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favorites().count
+        return presenter.numberOfFavorites
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(RepositoryViewCell.self, for: indexPath)
-        cell.configure(with: favorites()[indexPath.row])
+        let repository = presenter.favoriteRepository(at: indexPath.row)
+        cell.configure(with: repository)
         return cell
     }
 }
 
-extension FavoriteVireDataSource: UITableViewDelegate {
+extension FavoriteViewDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
-        let repository = favorites()[indexPath.row]
-        selectedFavorite(repository)
+        presenter.showFavoriteRepository(at: indexPath.row)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return RepositoryViewCell.calculateHeight(with: favorites()[indexPath.row], and: tableView)
+        let repository = presenter.favoriteRepository(at: indexPath.row)
+        return RepositoryViewCell.calculateHeight(with: repository, and: tableView)
     }
 }

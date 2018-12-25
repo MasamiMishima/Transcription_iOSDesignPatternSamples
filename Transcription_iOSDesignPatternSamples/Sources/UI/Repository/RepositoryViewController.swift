@@ -10,35 +10,27 @@ import UIKit
 import SafariServices
 import GithubKit
 
-final class RepositoryViewController: SFSafariViewController {
-    
-    private var appDelegate: AppDelegate? {
-        return UIApplication.shared.delegate as? AppDelegate
-    }
-    
-    private var favorites: [Repository] {
-        return appDelegate?.favorites ?? []
-    }
-    
+protocol RepositoryView: class {
+    func updateFavoriteButtonTitle(_ title: String)
+}
+
+final class RepositoryViewController: SFSafariViewController, RepositoryView {
     private(set) lazy var favoriteButtonItem: UIBarButtonItem = {
-        let favorites = self.favoriteHandlable?.getFavorites() ?? []
-        let title = self.favorites.contains(where: { $0.url == self.repository.url }) ? "Remove" : "Add"
-        return UIBarButtonItem(title: title,
+        return UIBarButtonItem(title: self.presenter.favoriteButtonTitle,
                                style: .plain,
                                target: self,
                                action: #selector(RepositoryViewController.favoriteButtonTap(_:)))
     }()
-    
-    private let repository: Repository
-    private weak var favoriteHandlable: FavoriteHandlable?
+    private let presenter: RepositoryPresenter
     
     init(repository: Repository,
-         favoriteHandlable: FavoriteHandlable?,
+         favoritePresenter: FavoritePresenter,
          entersReaderIfAvailable: Bool = true) {
-        self.repository = repository
-        self.favoriteHandlable = favoriteHandlable
+        self.presenter = RepositoryViewPresenter(repository: repository,
+                                                 favoritePresenter: favoritePresenter)
         super.init(url: repository.url, entersReaderIfAvailable: entersReaderIfAvailable)
         hidesBottomBarWhenPushed = true
+        self.presenter.view = self
     }
     
     override func viewDidLoad() {
@@ -48,14 +40,10 @@ final class RepositoryViewController: SFSafariViewController {
     }
     
     @objc private func favoriteButtonTap(_ sender: UIBarButtonItem) {
-        var favorites = favoriteHandlable?.getFavorites() ?? []
-        if let index = favorites.index(where: {$0.url == repository.url}) {
-            favorites.remove(at: index)
-            favoriteButtonItem.title = "Add"
-        } else {
-            favorites.append(repository)
-            favoriteButtonItem.title = "Remove"
-        }
-        favoriteHandlable?.setFavorites(favorites)
+        presenter.favoriteButtonTap()
+    }
+    
+    func updateFavoriteButtonTitle(_ title: String) {
+        favoriteButtonItem.title = title
     }
 }

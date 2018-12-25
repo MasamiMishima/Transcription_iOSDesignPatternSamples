@@ -18,9 +18,9 @@ final class LoadingView: UIView, Nibable {
     
     var isLoading: Bool = false {
         didSet {
-            DispatchQueue.main.sync { [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 guard let me = self else { return }
-                me.activityIndicator?.isHidden = !me.isHidden
+                me.activityIndicator?.isHidden = !me.isLoading
                 if me.isLoading {
                     me.activityIndicator?.startAnimating()
                 } else {
@@ -39,7 +39,6 @@ final class LoadingView: UIView, Nibable {
             view.leftAnchor.constraint(equalTo: leftAnchor),
             view.rightAnchor.constraint(equalTo: rightAnchor),
             view.bottomAnchor.constraint(equalTo: bottomAnchor)
-        ])
+            ])
     }
 }
-
