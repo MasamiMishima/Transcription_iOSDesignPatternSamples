@@ -24,7 +24,6 @@
 		5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */; };
 		5EF7095E21A2F6C100DEDFBC /* ApiSession.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */; };
 		5EF7096121A2FB9F00DEDFBC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */; };
-		5EF7096321A4541D00DEDFBC /* ClassName.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096221A4541D00DEDFBC /* ClassName.swift */; };
 		5EF7096521A4543D00DEDFBC /* NSObjectProtocol.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */; };
 		5EF7096721A4568600DEDFBC /* SearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */; };
 		5EF7096921A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */; };
@@ -75,7 +74,6 @@
 		5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiSession.extension.swift; sourceTree = "<group>"; };
 		5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SafariServices.framework; path = System/Library/Frameworks/SafariServices.framework; sourceTree = SDKROOT; };
-		5EF7096221A4541D00DEDFBC /* ClassName.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ClassName.swift; sourceTree = "<group>"; };
 		5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NSObjectProtocol.extension.swift; sourceTree = "<group>"; };
 		5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewDataSource.swift; sourceTree = "<group>"; };
 		5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewDataSource.swift; sourceTree = "<group>"; };
@@ -169,8 +167,8 @@
 			isa = PBXGroup;
 			children = (
 				5EF70941219FEC5200DEDFBC /* FavoriteViewController.swift */,
-				5EF7097021AAEEED00DEDFBC /* FavoriteViewDataSource.swift */,
 				5EF7097421B2D8F600DEDFBC /* FavoriteViewModel.swift */,
+				5EF7097021AAEEED00DEDFBC /* FavoriteViewDataSource.swift */,
 			);
 			path = Favorite;
 			sourceTree = "<group>";
@@ -236,7 +234,6 @@
 			isa = PBXGroup;
 			children = (
 				5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */,
-				5EF7096221A4541D00DEDFBC /* ClassName.swift */,
 				5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */,
 				5EF7097221B2D7D000DEDFBC /* Value.swift */,
 			);
@@ -448,7 +445,6 @@
 				5EF7096521A4543D00DEDFBC /* NSObjectProtocol.extension.swift in Sources */,
 				5EF7096721A4568600DEDFBC /* SearchViewDataSource.swift in Sources */,
 				5EF7097521B2D8F600DEDFBC /* FavoriteViewModel.swift in Sources */,
-				5EF7096321A4541D00DEDFBC /* ClassName.swift in Sources */,
 				8F652B3E219E43BC00AEAE67 /* AppDelegate.swift in Sources */,
 				5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */,
 			);
