@@ -10,252 +10,156 @@ import UIKit
 import GithubKit
 import NoticeObserveKit
 
-class SearchViewController: UIViewController {
-
+final class SearchViewController: UIViewController {
     @IBOutlet weak var totalCountLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var tableViewBottomConstraint: NSLayoutConstraint!
-    private(set) lazy var searchBar: UISearchBar = {
-        let searchBar = UISearchBar(frame: .zero)
-        searchBar.delegate = self
-        return searchBar
+    
+    var favoritesInput: AnyObserver<[Repository]>?
+    var favoritesOutput: Observable<[Repository]>?
+    
+    private let searchBar = UISearchBar(frame: .zero)
+    private let loadingView = LoadingView.makeFromNib()
+    
+    private let _selectedIndexPath = PublishSubject<IndexPath>()
+    private let _isReachedBottom = PublishSubject<Bool>()
+    private let _headerFooterView = PublishSubject<UIView>()
+    
+    private lazy var dataSource: SearchViewDataSource = {
+        .init(viewModel: self.viewModel,
+              selectedIndexPath: self._selectedIndexPath.asObserver(),
+              isReachedBottom: self._isReachedBottom.asObserver(),
+              headerFooterView: self._headerFooterView.asObserver())
+    }()
+    private lazy var viewModel: SearchViewModel = {
+        let viewDidAppear = self.rx
+            .methodInvoked(#selector(SearchViewController.viewDidAppear(_:)))
+            .map { _ in }
+        let viewDidDisappear = self.rx
+            .methodInvoked(#selector(SearchViewController.viewDidDisappear(_:)))
+            .map { _ in }
+        return .init(viewDidAppear: viewDidAppear,
+                     viewDidDisappear: viewDidDisappear,
+                     searchText: self.searchBar.rx.text.orEmpty,
+                     isReachedBottom: self._isReachedBottom,
+                     selectedIndexPath: self._selectedIndexPath,
+                     headerFooterView: self._headerFooterView)
     }()
     
-    fileprivate var query: String = "" {
-        didSet {
-            if query != oldValue {
-                users.removeAll()
-                pageInfo = nil
-                totalCount = 0
-            }
-            task?.cancel()
-            task = nil
-            fetchUsers()
-        }
-    }
-    private var task: URLSessionTask? = nil
-    private var pageInfo: PageInfo? = nil
-    private var totalCount: Int = 0 {
-        didSet {
-            totalCountLabel.text = "\(users.count) / \(totalCount)"
-        }
-    }
-    fileprivate var users: [User] = [] {
-        didSet {
-            totalCountLabel.text = "\(users.count) / \(totalCount)"
-            tableView.reloadData()
-        }
-    }
-    private(set) lazy var dataSource: SearchViewDataSource = {
-        return .init(fetchUsers: { [weak self] in
-            self?.fetchUsers()
-            }, isFetchingUsers: { [weak self] in
-                return self?.isFetchingUsers ?? false
-            }, users: { [weak self] in
-                self?.users ?? []
-            }, selectedUser: { [weak self] user in
-                self?.showUserRepository(with: user)
-        })
-    }()
-    fileprivate let debounce: (_ action: @escaping () -> ()) -> () = {
-        var lastFireTime: DispatchTime = .now()
-        var delay: DispatchTimeInterval = .milliseconds(500)
-        return { [delay] action in
-            let deadline: DispatchTime = .now() + delay
-            lastFireTime = .now()
-            DispatchQueue.global().asyncAfter(deadline: deadline) { [delay] in
-                let now: DispatchTime = .now()
-                let when: DispatchTime = lastFireTime + delay
-                if now < when { return }
-                lastFireTime = .now()
-                DispatchQueue.main.async {
-                    action()
-                }
-            }
-        }
-    }()
-    fileprivate var isFetchingUsers = false {
-        didSet {
-            tableView.reloadData()
-        }
-    }
-    private var pool = NoticeObserverPool()
-    
-    fileprivate let loadingView = LoadingView.makeFromNib()
-    
-    fileprivate var isReachedBottom: Bool = false {
-        didSet {
-            if isReachedBottom && isReachedBottom != oldValue {
-                fetchUsers()
-            }
-        }
-    }
-    
-    weak var favoriteHandlable: FavoriteHandlable?
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         navigationItem.titleView = searchBar
         searchBar.placeholder = "Input user name"
+        dataSource.configure(with: tableView)
         
-        // ここの作り方真似したい
-        configure(with: tableView)
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        observeKeyboard()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        if searchBar.isFirstResponder {
-            searchBar.resignFirstResponder()
-        }
-        pool = NoticeObserverPool()
-    }
-    
-    private func configure(with tableView: UITableView) {
-        tableView.dataSource = self
-        tableView.delegate = self
+        // observe viewModel
+        viewModel.accessTokenAlert
+            .bind(to: showAccessTokenAlert)
+            .disposed(by: disposeBag)
         
-        tableView.register(UserViewCell.self)
-        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: UITableViewHeaderFooterView.className)
-    }
-    
-    private func observeKeyboard() {
-        UIKeyboardWillShow.observe { [weak self] in
-            self?.view.layoutIfNeeded()
-            let extra = self?.tabBarController?.tabBar.bounds.height ?? 0
-            self?.tableViewBottomConstraint.constant = $0.frame.size.height - extra
-            UIView.animate(withDuration: $0.animationDuration, delay: 0, options: $0.animationCurve, animations: {
-                self?.view.layoutIfNeeded()
-            }, completion: nil)
-        }
-        .disposed(by: pool)
+        viewModel.keyboardWillShow
+            .bind(to: keyboardWillShow)
+            .disposed(by: disposeBag)
         
-        UIKeyboardWillHide.observe { [weak self] in
-            self?.view.layoutIfNeeded()
-           
-            self?.tableViewBottomConstraint.constant = 0
-            UIView.animate(withDuration: $0.animationDuration, delay: 0, options: $0.animationCurve, animations: {
-                    self?.view.layoutIfNeeded()
-                }, completion: nil)
-            }
-            .disposed(by: pool)
-    }
-    
-    private func fetchUsers() {
-        if query.isEmpty || task != nil { return }
-        if let pageInfo = pageInfo, !pageInfo.hasNextPage || pageInfo.endCursor == nil { return }
-        isFetchingUsers = true
-        let request = SearchUserRequest(query: query, after: pageInfo?.endCursor)
-        self.task = ApiSession.shared.send(request) { [weak self] in
-            switch $0 {
-            case .success(let value):
-                DispatchQueue.main.async {
-                    self?.pageInfo = value.pageInfo
-                    self?.users.append(contentsOf: value.nodes)
-                    self?.totalCount = value.totalCount
-                }
-            case .failure(let error):
-                if case .emptyToken? = (error as? ApiSession.Error) {
-                    DispatchQueue.main.async {
-                        guard let me = self else { return }
-                        let message = "\"Github Personal Access Token\" is Required.\n Please set it in ApiSession.extension.swift!"
-                        let alert = UIAlertController(title: "Access Token Error",
-                                                      message: message,
-                                                      preferredStyle: .alert)
-                        me.present(alert, animated: false, completion: nil)
-                    }
-                }
-            }
-            DispatchQueue.main.async {
-                self?.isFetchingUsers = false
-            }
-            self?.task = nil
-        }
-    }
-    
-    fileprivate func showUserRepository(with user: User) {
-        let vc = UserRepositoryViewController(user: user, favoriteHandlable: favoriteHandlable)
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-extension SearchViewController: UISearchBarDelegate {
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.resignFirstResponder()
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        debounce { [weak self] in
-            self?.query = searchText
-        }
-    }
-}
-
-extension SearchViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(UserViewCell.self, for: indexPath)
-        cell.configure(with: users[indexPath.row])
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        return nil
-    }
-    
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: UITableViewHeaderFooterView.className) else {
-            return nil
-        }
-        loadingView.removeFromSuperview()
-        loadingView.isLoading = isFetchingUsers
-        loadingView.add(to: view)
-        return view
-    }
-}
-extension SearchViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
+        viewModel.keyboardWillHide
+            .bind(to: keyboardWillHide)
+            .disposed(by: disposeBag)
         
-        let user = users[indexPath.row]
-        showUserRepository(with: user)
+        viewModel.countString
+            .bind(to: totalCountLabel.rx.text)
+            .disposed(by: disposeBag)
+        
+        viewModel.reloadData
+            .bind(to: reloadData)
+            .disposed(by: disposeBag)
+        
+        viewModel.selectedUser
+            .bind(to: showUserRepository)
+            .disposed(by: disposeBag)
+        
+        viewModel.updateLoadingView
+            .bind(to: updateLoadingView)
+            .disposed(by: disposeBag)
+        
+        // observe views
+        Observable.merge(searchBar.rx.searchButtonClicked.asObservable(),
+                         searchBar.rx.cancelButtonClicked.asObservable())
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.resignFirstResponder()
+                self?.searchBar.showsCancelButton = false
+            })
+            .disposed(by: disposeBag)
+        
+        searchBar.rx.textDidBeginEditing
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.showsCancelButton = true
+            })
+            .disposed(by: disposeBag)
+        
+        rx.methodInvoked(#selector(SearchViewController.viewWillDisappear(_:)))
+            .map { _ in }
+            .subscribe(onNext: { [weak self] in
+                self?.searchBar.resignFirstResponder()
+            })
+            .disposed(by: disposeBag)
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UserViewCell.calculateHeight(with: users[indexPath.row], and: tableView)
+    private var showAccessTokenAlert: AnyObserver<(String, String)> {
+        return Binder(self) { (me, value: (title: String, message: String)) in
+            let alert = UIAlertController(title: value.title, message: value.message, preferredStyle: .alert)
+            me.present(alert, animated: false, completion: nil)
+            }.asObserver()
     }
     
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return .leastNormalMagnitude
+    private var reloadData: AnyObserver<Void>  {
+        return Binder(self) { me, _ in
+            me.tableView.reloadData()
+            }.asObserver()
     }
     
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return isFetchingUsers ? LoadingView.defaultHeight : .leastNormalMagnitude
+    private var keyboardWillShow: AnyObserver<UIKeyboardInfo> {
+        return Binder(self) { me, keyboardInfo in
+            me.view.layoutIfNeeded()
+            let extra = me.tabBarController?.tabBar.bounds.height ?? 0
+            me.tableViewBottomConstraint.constant = keyboardInfo.frame.size.height - extra
+            UIView.animate(withDuration: keyboardInfo.animationDuration,
+                           delay: 0,
+                           options: keyboardInfo.animationCurve,
+                           animations: { me.view.layoutIfNeeded() },
+                           completion: nil)
+            }.asObserver()
     }
     
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let maxScrollDistance = max(0, scrollView.contentSize.height - scrollView.bounds.size.height)
-        isReachedBottom = maxScrollDistance <= scrollView.contentOffset.y
+    private var  keyboardWillHide: AnyObserver<UIKeyboardInfo> {
+        return Binder(self) { me, keyboardInfo in
+            me.view.layoutIfNeeded()
+            me.tableViewBottomConstraint.constant = 0
+            UIView.animate(withDuration: keyboardInfo.animationDuration,
+                           delay: 0,
+                           options: keyboardInfo.animationCurve,
+                           animations: { me.view.layoutIfNeeded() },
+                           completion: nil)
+            }.asObserver()
+    }
+    
+    private var showUserRepository: AnyObserver<User> {
+        return Binder(self) { me, user in
+            guard let favoritesOutput = me.favoritesOutput, let favoritesInput = me.favoritesInput else { return }
+            let vc = UserRepositoryViewController(user: user,
+                                                  favoritesOutput: favoritesOutput,
+                                                  favoritesInput: favoritesInput)
+            me.navigationController?.pushViewController(vc, animated: true)
+            }.asObserver()
+    }
+    
+    private var updateLoadingView: AnyObserver<(UIView, Bool)> {
+        return Binder(self) { (me, value: (view: UIView, isLoading: Bool)) in
+            me.loadingView.removeFromSuperview()
+            me.loadingView.isLoading = value.isLoading
+            me.loadingView.add(to: value.view)
+            }.asObserver()
     }
 }

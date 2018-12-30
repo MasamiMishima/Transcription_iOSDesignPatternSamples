@@ -38,6 +38,7 @@
 		8F652B48219E43C000AEAE67 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B47219E43C000AEAE67 /* Assets.xcassets */; };
 		8F652B4B219E43C000AEAE67 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8F652B49219E43C000AEAE67 /* LaunchScreen.storyboard */; };
 		8FAD6AF421D8F647004160D1 /* RepositoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAD6AF321D8F647004160D1 /* RepositoryViewModel.swift */; };
+		8FAD6AF621D8FAAA004160D1 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8FAD6AF521D8FAAA004160D1 /* SearchViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -93,6 +94,7 @@
 		8F652B51219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Transcription_iOSDesignPatternSamplesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8F652B5C219E43C000AEAE67 /* Transcription_iOSDesignPatternSamplesUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Transcription_iOSDesignPatternSamplesUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		8FAD6AF321D8F647004160D1 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
+		8FAD6AF521D8FAAA004160D1 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,6 +191,7 @@
 			children = (
 				5EF70947219FEEB200DEDFBC /* SearchViewController.swift */,
 				5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */,
+				8FAD6AF521D8FAAA004160D1 /* SearchViewModel.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -437,6 +440,7 @@
 				5EF70942219FEC5200DEDFBC /* FavoriteViewController.swift in Sources */,
 				5EF7097121AAEEED00DEDFBC /* FavoriteViewDataSource.swift in Sources */,
 				5EF7097321B2D7D000DEDFBC /* Value.swift in Sources */,
+				8FAD6AF621D8FAAA004160D1 /* SearchViewModel.swift in Sources */,
 				5EF70945219FED6400DEDFBC /* RepositoryViewController.swift in Sources */,
 				5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */,
 				5EF7094C219FEEEE00DEDFBC /* UserRepositoryViewController.swift in Sources */,
