@@ -8,7 +8,8 @@
 
 import UIKit
 import GithubKit
-import NoticeObserveKit
+import RxSwift
+import RxCocoa
 
 final class SearchViewController: UIViewController {
     @IBOutlet weak var totalCountLabel: UILabel!

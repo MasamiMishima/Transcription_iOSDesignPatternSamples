@@ -13,20 +13,20 @@ final class LoadingView: UIView, Nibable {
     typealias RegisterType = RegisterNib
     
     static let defaultHeight: CGFloat = 44
-    
+
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     
     var isLoading: Bool = false {
         didSet {
-            DispatchQueue.main.sync { [weak self] in
-                guard let me = self else { return }
-                me.activityIndicator?.isHidden = !me.isHidden
-                if me.isLoading {
-                    me.activityIndicator?.startAnimating()
-                } else {
-                    me.activityIndicator?.stopAnimating()
-                }
-            }
+//            DispatchQueue.main.sync { [weak self] in
+//                guard let me = self else { return }
+//                me.activityIndicator?.isHidden = !me.isHidden
+//                if me.isLoading {
+//                    me.activityIndicator?.startAnimating()
+//                } else {
+//                    me.activityIndicator?.stopAnimating()
+//                }
+//            }
         }
     }
     

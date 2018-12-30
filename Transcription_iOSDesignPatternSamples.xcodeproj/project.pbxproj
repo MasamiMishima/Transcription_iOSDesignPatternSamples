@@ -7,12 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70933219FE71F00DEDFBC /* RxBlocking.framework */; };
-		5EF7093A219FE72000DEDFBC /* NoticeObserveKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70934219FE71F00DEDFBC /* NoticeObserveKit.framework */; };
-		5EF7093B219FE72000DEDFBC /* Nuke.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70935219FE71F00DEDFBC /* Nuke.framework */; };
-		5EF7093C219FE72000DEDFBC /* RxSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70936219FE72000DEDFBC /* RxSwift.framework */; };
-		5EF7093D219FE72000DEDFBC /* SwiftIconFont.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70937219FE72000DEDFBC /* SwiftIconFont.framework */; };
-		5EF7093E219FE72000DEDFBC /* RxCocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF70938219FE72000DEDFBC /* RxCocoa.framework */; };
 		5EF70942219FEC5200DEDFBC /* FavoriteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF70941219FEC5200DEDFBC /* FavoriteViewController.swift */; };
 		5EF70945219FED6400DEDFBC /* RepositoryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF70944219FED6400DEDFBC /* RepositoryViewController.swift */; };
 		5EF70948219FEEB200DEDFBC /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF70947219FEEB200DEDFBC /* SearchViewController.swift */; };
@@ -20,10 +14,8 @@
 		5EF7095021A1AE4600DEDFBC /* UIKeyboardInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7094F21A1AE4600DEDFBC /* UIKeyboardInfo.swift */; };
 		5EF7095421A1B08E00DEDFBC /* UIKeyboardWillHide.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095321A1B08E00DEDFBC /* UIKeyboardWillHide.swift */; };
 		5EF7095621A1B12700DEDFBC /* UIKeyboardWillShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095521A1B12700DEDFBC /* UIKeyboardWillShow.swift */; };
-		5EF7095921A2F00500DEDFBC /* GithubKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF7095821A2F00500DEDFBC /* GithubKit.framework */; };
 		5EF7095B21A2F09E00DEDFBC /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095A21A2F09E00DEDFBC /* LoadingView.swift */; };
 		5EF7095E21A2F6C100DEDFBC /* ApiSession.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7095D21A2F6C100DEDFBC /* ApiSession.extension.swift */; };
-		5EF7096121A2FB9F00DEDFBC /* SafariServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */; };
 		5EF7096521A4543D00DEDFBC /* NSObjectProtocol.extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096421A4543D00DEDFBC /* NSObjectProtocol.extension.swift */; };
 		5EF7096721A4568600DEDFBC /* SearchViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096621A4568600DEDFBC /* SearchViewDataSource.swift */; };
 		5EF7096921A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF7096821A7E0EF00DEDFBC /* UserRepositoryViewDataSource.swift */; };
@@ -95,6 +87,7 @@
 		8FAD6AF321D8F647004160D1 /* RepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepositoryViewModel.swift; sourceTree = "<group>"; };
 		8FAD6AF521D8FAAA004160D1 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
 		8FAD6AF721D8FBB4004160D1 /* UserRepositoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserRepositoryViewModel.swift; sourceTree = "<group>"; };
+		8FAD6AF921D8FFE2004160D1 /* RxTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = RxTest.framework; path = Carthage/Build/iOS/RxTest.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,14 +95,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5EF7096121A2FB9F00DEDFBC /* SafariServices.framework in Frameworks */,
-				5EF7095921A2F00500DEDFBC /* GithubKit.framework in Frameworks */,
-				5EF7093A219FE72000DEDFBC /* NoticeObserveKit.framework in Frameworks */,
-				5EF70939219FE72000DEDFBC /* RxBlocking.framework in Frameworks */,
-				5EF7093B219FE72000DEDFBC /* Nuke.framework in Frameworks */,
-				5EF7093C219FE72000DEDFBC /* RxSwift.framework in Frameworks */,
-				5EF7093D219FE72000DEDFBC /* SwiftIconFont.framework in Frameworks */,
-				5EF7093E219FE72000DEDFBC /* RxCocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +118,7 @@
 		5EF70932219FE71E00DEDFBC /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				8FAD6AF921D8FFE2004160D1 /* RxTest.framework */,
 				5EF7096021A2FB9F00DEDFBC /* SafariServices.framework */,
 				5EF7095821A2F00500DEDFBC /* GithubKit.framework */,
 				5EF70934219FE71F00DEDFBC /* NoticeObserveKit.framework */,
@@ -286,7 +272,7 @@
 				8F652B36219E43BC00AEAE67 /* Sources */,
 				8F652B37219E43BC00AEAE67 /* Frameworks */,
 				8F652B38219E43BC00AEAE67 /* Resources */,
-				5EF7095721A2EB3C00DEDFBC /* ShellScript */,
+				5EF7095721A2EB3C00DEDFBC /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -406,7 +392,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		5EF7095721A2EB3C00DEDFBC /* ShellScript */ = {
+		5EF7095721A2EB3C00DEDFBC /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -420,7 +406,9 @@
 				"$(SRCROOT)/Carthage/Build/iOS/GithubKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/NoticeObserveKit.framework",
 				"$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework",
+				"$(SRCROOT)/Carthage/Build/iOS/RxTest.framework",
 			);
+			name = "Run Script";
 			outputFileListPaths = (
 			);
 			outputPaths = (
@@ -627,7 +615,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -639,6 +628,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "id.Transcription-iOSDesignPatternSamples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -648,7 +638,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
@@ -660,6 +651,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "id.Transcription-iOSDesignPatternSamples";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
