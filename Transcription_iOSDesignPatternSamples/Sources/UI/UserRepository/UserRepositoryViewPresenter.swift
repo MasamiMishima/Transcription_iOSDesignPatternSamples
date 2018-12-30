@@ -23,8 +23,9 @@ protocol UserRepositoryPresenter: class {
 }
 
 final class UserRepositoryViewPresenter: UserRepositoryPresenter {
-    weak var view: UserrepositoryView?
-    private let user: UserRepositoryPresenter
+    weak var view: UserRepositoryView?
+    private let user: User
+    
     private var pageInfo: PageInfo? = nil
     private var task: URLSessionTask? = nil
     private var repositories: [Repository] = [] {
@@ -36,10 +37,18 @@ final class UserRepositoryViewPresenter: UserRepositoryPresenter {
             }
         }
     }
+    private var totalCount: Int = 0  {
+        didSet {
+            DispatchQueue.main.async { [weak self] in
+                guard let me = self else { return }
+                me.view?.updateTotalCountLabel("\(me.repositories.count) / \(me.totalCount)")
+                me.view?.reloadData()
+            }
+        }
+    }
     private(set) var isFetchingRepositories = false {
         didSet {
-            DispatchQueue.main.async {
-                [weak self] in
+            DispatchQueue.main.async { [weak self] in
                 self?.view?.reloadData()
             }
         }
@@ -51,6 +60,7 @@ final class UserRepositoryViewPresenter: UserRepositoryPresenter {
             }
         }
     }
+    
     var numberOfRepositories: Int {
         return repositories.count
     }
@@ -80,18 +90,20 @@ final class UserRepositoryViewPresenter: UserRepositoryPresenter {
             self?.task = nil
         }
     }
+    
     func repository(at index: Int) -> Repository {
         return repositories[index]
     }
     
     func showRepository(at index: Int) {
         let repository = repositories[index]
-         view?.showRepository(with: repository)
+        view?.showRepository(with: repository)
     }
     
     func showLoadingView(on view: UIView) {
         self.view?.updateLoadingView(with: view, isLoading: isFetchingRepositories)
     }
+    
     func setIsReachedBottom(_ isReachedBottom: Bool) {
         self.isReachedBottom = isReachedBottom
     }
