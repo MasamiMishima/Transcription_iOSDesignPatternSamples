@@ -9,33 +9,23 @@
 import Foundation
 import UIKit
 import GithubKit
+import RxSwift
 
 final class SearchViewDataSource: NSObject {
-    let fetchUsers: () -> ()
-    let isFetchingUsers: () -> Bool
-    let users: () -> [User]
-    let selectedUser: (User) -> Void
+    private let selectedIndexPath: AnyObserver<IndexPath>
+    private let isReachedBottom: AnyObserver<Bool>
+    private let headerFooterView: AnyObserver<UIView>
     
-    fileprivate let loadingView = LoadingView.makeFromNib()
+    private let viewModel: SearchViewModel
     
-    fileprivate var isReachedBottom: Bool = false {
-        didSet {
-            if isReachedBottom && isReachedBottom != oldValue {
-                fetchUsers()
-            }
-        }
-    }
-    
-    init(fetchUsers: @escaping () -> (),
-         isFetchingUsers: @escaping () -> Bool,
-         users: @escaping () -> [User],
-         selectedUser: @escaping (User) -> Void) {
-        self.fetchUsers = fetchUsers
-        self.isFetchingUsers = isFetchingUsers
-        self.users = users
-        self.selectedUser = selectedUser
-        
-        super.init()
+    init(viewModel: SearchViewModel,
+         selectedIndexPath: AnyObserver<IndexPath>,
+         isReachedBottom: AnyObserver<Bool>,
+         headerFooterView: AnyObserver<UIView>) {
+        self.viewModel = viewModel
+        self.selectedIndexPath = selectedIndexPath
+        self.isReachedBottom = isReachedBottom
+        self.headerFooterView = headerFooterView
     }
     
     func configure(with tableView: UITableView) {
@@ -43,17 +33,20 @@ final class SearchViewDataSource: NSObject {
         tableView.delegate = self
         
         tableView.register(UserViewCell.self)
-        tableView.register(UITableViewHeaderFooterView.self, forHeaderFooterViewReuseIdentifier: UITableViewHeaderFooterView.className)
+        tableView.register(UITableViewHeaderFooterView.self,
+                           forHeaderFooterViewReuseIdentifier: UITableViewHeaderFooterView.className)
     }
 }
+
 extension SearchViewDataSource: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return users().count
+        return viewModel.value.users.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeue(UserViewCell.self, for: indexPath)
-        cell.configure(with: users()[indexPath.row])
+        let user = viewModel.value.users[indexPath.row]
+        cell.configure(with: user)
         return cell
     }
     
@@ -65,22 +58,20 @@ extension SearchViewDataSource: UITableViewDataSource {
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: UITableViewHeaderFooterView.className) else {
             return nil
         }
-        loadingView.removeFromSuperview()
-        loadingView.isLoading = isFetchingUsers()
-        loadingView.add(to: view)
+        headerFooterView.onNext(view)
         return view
     }
 }
+
 extension SearchViewDataSource: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        
-        let user = users()[indexPath.row]
-        selectedUser(user)
+        selectedIndexPath.onNext(indexPath)
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UserViewCell.calculateHeight(with: users()[indexPath.row], and: tableView)
+        let user = viewModel.value.users[indexPath.row]
+        return UserViewCell.calculateHeight(with: user, and: tableView)
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -88,11 +79,11 @@ extension SearchViewDataSource: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return isFetchingUsers() ? LoadingView.defaultHeight : .leastNormalMagnitude
+        return viewModel.value.isFetchingUsers ? LoadingView.defaultHeight : .leastNormalMagnitude
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let maxScrollDistance = max(0, scrollView.contentSize.height - scrollView.bounds.size.height)
-        isReachedBottom = maxScrollDistance <= scrollView.contentOffset.y
+        isReachedBottom.onNext(maxScrollDistance <= scrollView.contentOffset.y)
     }
 }

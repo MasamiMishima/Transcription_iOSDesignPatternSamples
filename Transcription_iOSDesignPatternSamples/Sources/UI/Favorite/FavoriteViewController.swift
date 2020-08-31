@@ -11,77 +11,55 @@ import GithubKit
 import RxSwift
 import RxCocoa
 
-protocol FavoriteHandlable: class {
-    func getFavorites() -> [Repository]
-    func setFavorites(_ repositories: [Repository])
-}
-
 final class FavoriteViewController: UIViewController {
-    
     @IBOutlet weak var tableView: UITableView!
     
-    fileprivate var favorites: [Repository] = []
+    var favoritesInput: AnyObserver<[Repository]> { return favorites.asObserver() }
+    var favoritesOutput: Observable<[Repository]> { return viewModel.favorites }
+    
+    private let _selectedIndexPath = PublishSubject<IndexPath>()
+    
+    private lazy var dataSource: FavoriteViewDataSource = {
+        return .init(viewModel: self.viewModel,
+                     selectedIndexPath: self._selectedIndexPath.asObserver())
+    }()
+    private private(set) lazy var viewModel: FavoriteViewModel = {
+        .init(favoritesObservable: self.favorites,
+              selectedIndexPath: self._selectedIndexPath)
+    }()
+    
+    private let favorites = PublishSubject<[Repository]>()
+    private let disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         title = "On Memory Favorite"
         automaticallyAdjustsScrollViewInsets = false
+        dataSource.configure(with: tableView)
         
-        configure(with: tableView)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        // observe viewModel
+        viewModel.selectedRepository
+            .bind(to: showRepository)
+            .disposed(by: disposeBag)
         
-        tableView.reloadData()
+        viewModel.relaodData
+            .bind(to: reloadData)
+            .disposed(by: disposeBag)
     }
     
-    private func configure(with tableView: UITableView) {
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.register(RepositoryViewCell.self)
+    private var showRepository: AnyObserver<Repository> {
+        return Binder(self) { me, repository in
+            let vc = RepositoryViewController(repository: repository,
+                                              favoritesOutput: me.favoritesOutput,
+                                              favoritesInput: me.favoritesInput)
+            me.navigationController?.pushViewController(vc, animated: true)
+            }.asObserver()
     }
     
-    private func showRepository(with repository: Repository) {
-        let vc = RepositoryViewController(repository: repository,
-                                          favoriteHandlable: self)
-        navigationController?.pushViewController(vc, animated: true)
-    }
-}
-
-extension FavoriteViewController: FavoriteHandlable {
-    func getFavorites() -> [Repository] {
-        return favorites
-    }
-    
-    func setFavorites(_ repositories: [Repository]) {
-        favorites = repositories
-    }
-}
-
-extension FavoriteViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return favorites.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeue(RepositoryViewCell.self, for: indexPath)
-        cell.configure(with: favorites[indexPath.row])
-        return cell
-    }
-}
-
-extension FavoriteViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        tableView.deselectRow(at: indexPath, animated: false)
-        
-        let repository = favorites[indexPath.row]
-        showRepository(with: repository)
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return RepositoryViewCell.calculateHeight(with: favorites[indexPath.row], and: tableView)
+    private var reloadData: AnyObserver<Void> {
+        return Binder(self) { me, _ in
+            me.tableView.reloadData()
+            }.asObserver()
     }
 }

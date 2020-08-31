@@ -9,35 +9,29 @@
 import UIKit
 import SafariServices
 import GithubKit
+import RxSwift
+import RxCocoa
 
 final class RepositoryViewController: SFSafariViewController {
-    
-    private var appDelegate: AppDelegate? {
-        return UIApplication.shared.delegate as? AppDelegate
-    }
-    
-    private var favorites: [Repository] {
-        return appDelegate?.favorites ?? []
-    }
-    
-    private(set) lazy var favoriteButtonItem: UIBarButtonItem = {
-        let favorites = self.favoriteHandlable?.getFavorites() ?? []
-        let title = self.favorites.contains(where: { $0.url == self.repository.url }) ? "Remove" : "Add"
-        return UIBarButtonItem(title: title,
-                               style: .plain,
-                               target: self,
-                               action: #selector(RepositoryViewController.favoriteButtonTap(_:)))
-    }()
-    
-    private let repository: Repository
-    private weak var favoriteHandlable: FavoriteHandlable?
+    private let favoriteButtonItem: UIBarButtonItem
+    private let disposeBag = DisposeBag()
+    private let viewModel: RepositoryViewModel
     
     init(repository: Repository,
-         favoriteHandlable: FavoriteHandlable?,
-         entersReaderIfAvailable: Bool = true) {
-        self.repository = repository
-        self.favoriteHandlable = favoriteHandlable
-        super.init(url: repository.url, entersReaderIfAvailable: entersReaderIfAvailable)
+         favoritesOutput: Observable<[Repository]>,
+         favoritesInput: AnyObserver<[Repository]>,
+         entersRederIfAvailable: Bool = true) {
+        let favoriteButtonItem = UIBarButtonItem(
+            title: nil, style: .plain, target: nil, action: nil)
+        self.favoriteButtonItem = favoriteButtonItem
+        self.viewModel = RepositoryViewModel(
+            repository: repository,
+            favoritesOutput: favoritesOutput,
+            favoritesInput: favoritesInput,
+            favoriteButtonTap: favoriteButtonItem.rx.tap)
+        
+        super.init(url: repository.url,
+                   entersReaderIfAvailable: entersRederIfAvailable)
         hidesBottomBarWhenPushed = true
     }
     
@@ -45,17 +39,8 @@ final class RepositoryViewController: SFSafariViewController {
         super.viewDidLoad()
         
         navigationItem.rightBarButtonItem = favoriteButtonItem
-    }
-    
-    @objc private func favoriteButtonTap(_ sender: UIBarButtonItem) {
-        var favorites = favoriteHandlable?.getFavorites() ?? []
-        if let index = favorites.index(where: {$0.url == repository.url}) {
-            favorites.remove(at: index)
-            favoriteButtonItem.title = "Add"
-        } else {
-            favorites.append(repository)
-            favoriteButtonItem.title = "Remove"
-        }
-        favoriteHandlable?.setFavorites(favorites)
+        viewModel.favoriteButtonTitle
+        .bind(to: favoriteButtonItem.rx.title)
+        .disposed(by: disposeBag)
     }
 }
